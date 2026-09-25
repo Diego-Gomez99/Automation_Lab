@@ -1,0 +1,32 @@
+name: UE5 Automation Testing Pipeline
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  run-automation-tests:
+    name: Run UE5 C++ Tests
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Execute Automation Suite
+        shell: cmd
+        run: |
+          call RunAllTests.bat
+
+      - name: Upload Test Report Artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ue5-automation-report
+          path: |
+            Saved/Automation/Reports/index.html
+            Saved/Automation/Reports/AutomationTestResults.log
+          retention-days: 14
