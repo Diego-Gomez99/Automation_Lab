@@ -1,0 +1,11 @@
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/*
+!Saved/Automation/
+!Saved/Automation/Reports/
+.vs/
+.idea/
+*.sln
+*.user
+*.csproj
